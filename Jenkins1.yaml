@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: Jenkins1.651.2
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: Jenkins
+        version: 1.651.2
+  template: 
+    metadata: 
+      labels: 
+        app: Jenkins
+        version: 1.651.2
+    spec: 
+      containers:
+        - image: jenkins/jenkins:1.651.2
+          name: Jenkins
+          ports: 
+            - containerPort: 8080
+              protocol: TCP
+          livenessProbe: 
+            failureThreshold: 2
+            periodSeconds: 5
+            successThreshold: 2
+          readinessProbe:
+            failureThreshold: 2
+            periodSeconds: 5
+            successThreshold: 2
+
+
+

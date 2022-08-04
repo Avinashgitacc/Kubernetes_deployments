@@ -1,0 +1,23 @@
+---
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: activity1
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: jenkins
+      version: "2.60.2"
+  template:
+    metadata:
+      labels:
+        app: jenkins
+        version: "2.60.2"
+    spec: 
+      containers:
+        - image: "jenkins/jenkins:2.60.2"
+          name: jenkins
+          ports: 
+            - containerPort: 8080
+              protocol: TCP
